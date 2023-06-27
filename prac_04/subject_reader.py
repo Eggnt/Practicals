@@ -6,6 +6,7 @@ Data file -> lists program
 FILENAME = "subject_data.txt"
 subjects = []
 
+
 def main():
     get_data(subjects)
     display_subject_details()
