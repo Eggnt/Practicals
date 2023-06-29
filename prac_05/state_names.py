@@ -8,7 +8,7 @@ CODE_TO_NAME = {"QLD": "Queensland", "NSW": "New South Wales", "NT": "Northern T
                 "ACT": "Australian Capital Territory", "VIC": "Victoria", "TAS": "Tasmania"}
 print(CODE_TO_NAME)
 
-'''Look Before You Leap method'''
+'''Look Before You Leap Method'''
 
 state_code = input("Enter short state: ").upper()
 while state_code != "":
@@ -24,7 +24,7 @@ max_code_length = max(len(state_code) for state_code in list(CODE_TO_NAME.keys()
 for state_code, state_name in CODE_TO_NAME.items():
     print(f"{state_code:{max_code_length}} is {state_name}")
 
-'''Easier to Ask Forgiveness than Permission method'''
+'''Easier to Ask Forgiveness than Permission Method'''
 
 state_code = input("Enter short state: ").upper()
 while state_code != "":
