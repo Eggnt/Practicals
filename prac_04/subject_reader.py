@@ -21,6 +21,7 @@ def get_data(subject):
         parts[2] = int(parts[2])  # Make the number an integer (ignore PyCharm's warning)
         subject += [parts]
     input_file.close()
+    print(subject)
 
 
 def display_subject_details():
