@@ -28,4 +28,5 @@ def display_subject_details():
         print(f"{subject[0]} is taught by {subject[1]} and has {subject[2]} students.")
 
 
+
 main()
