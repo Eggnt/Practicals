@@ -8,12 +8,14 @@ from prac_06.guitar import Guitar
 
 def main():
     guitars = read_file()
-    # get_new_guitars(guitars)
-    # for guitar in guitars:
-    #     print(guitar)
+    get_new_guitars(guitars)
     guitars.sort()
     for guitar in guitars:
         print(guitar)
+    out_file = open('guitars.csv', 'w')
+    for guitar in guitars:
+        print(f"{guitar.name},{guitar.year},{guitar.cost}", file=out_file)
+    out_file.close()
 
 
 def get_new_guitars(guitars):
