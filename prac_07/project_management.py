@@ -39,8 +39,8 @@ def main():
             updated_priority = ""
             for i, project in enumerate(projects):
                 print(f"{i} {project}")
-            updated_project = determine_integer_validity(updated_project, "Project Choice: ")
-            updated_percentage = determine_integer_validity(updated_percentage, "New Percentage: ")
+            updated_project = determine_range_validity(updated_project, 0, (len(projects) - 1), "Project Choice: ")
+            updated_percentage = determine_range_validity(updated_percentage, 0, 100, "New Percentage: ")
             updated_priority = determine_integer_validity(updated_priority, "New Priority: ")
             projects[updated_project].update(updated_priority, updated_percentage)
         else:
@@ -66,7 +66,7 @@ def print_projects_of_completion(projects, complete):
 
 
 def save_projects_file(projects, save_name):
-    out_file = open({save_name}, 'w')
+    out_file = open(save_name, 'w')
     for project in projects:
         print(f"{project.name}\t{project.start_date}\t{project.priority}\t"
               f"{project.cost_estimate}\t{project.completion_percentage}", file=out_file)
@@ -96,6 +96,20 @@ def determine_integer_validity(potential_integer, input_prompt):
             valid = True
         except ValueError:
             print("Invalid input; enter a valid number")
+    return potential_integer
+
+
+def determine_range_validity(potential_integer, minimum, maximum, input_prompt):
+    """Checks if an integer is within a certain range"""
+    valid = False
+    while valid is False:
+        potential_integer = determine_integer_validity(potential_integer, input_prompt)
+        if minimum <= potential_integer <= maximum:
+            valid = True
+        else:
+            print(f"The number must be between {minimum} and {maximum}")
+            potential_integer = determine_integer_validity(potential_integer, input_prompt)
+
     return potential_integer
 
 
