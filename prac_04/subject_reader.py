@@ -21,11 +21,13 @@ def get_data(subject):
         parts[2] = int(parts[2])  # Make the number an integer (ignore PyCharm's warning)
         subject += [parts]
     input_file.close()
+    print(subject)
 
 
 def display_subject_details():
     for subject in subjects:
         print(f"{subject[0]} is taught by {subject[1]} and has {subject[2]} students.")
+
 
 
 main()
