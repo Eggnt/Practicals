@@ -11,21 +11,24 @@ MENU = f"- (L)oad projects  \n- (S)ave projects  \n- (D)isplay projects  \n- (F)
 
 
 def main():
+    projects = []
     choice = input(MENU).upper()
-    projects = load_file('projects.txt')
     while choice != "Q":
-        # if choice == "L":
-        # in_file = input("Please enter the name of the file you wish to load: ")
-        # projects = load_file(in_file)
-        if choice == "S":
+        if choice == "L":
+            in_file = input("Please enter the name of the file you wish to load: ")
+            projects = load_file(in_file)
+        elif choice == "S":
             save_name = input("Please enter the name of the file you wish to save to: ")
             save_projects_file(projects, save_name)
         elif choice == "D":
-            sorted_projects = sorted(projects)
-            print("Incomplete Projects:")
-            print_projects_of_completion(sorted_projects, False)
-            print("Completed Projects:")
-            print_projects_of_completion(sorted_projects, True)
+            if len(projects) > 0:
+                sorted_projects = sorted(projects)
+                print("Incomplete Projects:")
+                print_projects_of_completion(sorted_projects, False)
+                print("Completed Projects:")
+                print_projects_of_completion(sorted_projects, True)
+            else:
+                print("No projects to display. Choose 'A' to add more projects or 'L' to load an existing file.")
         elif choice == "F":
             given_date = input("Show projects that start after date (dd/mm/yy): ")
             for project in projects:
@@ -34,15 +37,18 @@ def main():
         elif choice == "A":
             get_new_project(projects)
         elif choice == "U":
-            updated_project = ""
-            updated_percentage = ""
-            updated_priority = ""
-            for i, project in enumerate(projects):
-                print(f"{i} {project}")
-            updated_project = determine_range_validity(updated_project, 0, (len(projects) - 1), "Project Choice: ")
-            updated_percentage = determine_range_validity(updated_percentage, 0, 100, "New Percentage: ")
-            updated_priority = determine_integer_validity(updated_priority, "New Priority: ")
-            projects[updated_project].update(updated_priority, updated_percentage)
+            if len(projects) > 0:
+                updated_project = ""
+                updated_percentage = ""
+                updated_priority = ""
+                for i, project in enumerate(projects):
+                    print(f"{i} {project}")
+                updated_project = determine_range_validity(updated_project, 0, (len(projects) - 1), "Project Choice: ")
+                updated_percentage = determine_range_validity(updated_percentage, 0, 100, "New Percentage: ")
+                updated_priority = determine_integer_validity(updated_priority, "New Priority: ")
+                projects[updated_project].update(updated_priority, updated_percentage)
+            else:
+                print("No projects to update.")
         else:
             print("Invalid menu choice")
         choice = str(input(MENU)).upper()
