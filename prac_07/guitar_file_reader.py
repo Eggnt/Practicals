@@ -6,12 +6,24 @@ File to read and append guitars
 from prac_06.guitar import Guitar
 
 
-
 def main():
     guitars = read_file()
+    # get_new_guitars(guitars)
+    # for guitar in guitars:
+    #     print(guitar)
     guitars.sort()
     for guitar in guitars:
         print(guitar)
+
+
+def get_new_guitars(guitars):
+    name = str(input("Name: "))
+    while name != "":
+        year = int(input("Year: "))
+        cost = float(input("Cost: "))
+        guitars.append(Guitar(name, year, cost))
+        name = str(input("Name: "))
+    return guitars
 
 
 def read_file():
@@ -20,7 +32,7 @@ def read_file():
     in_file.readline()
     for line in in_file:
         parts = line.strip().split(',')
-        guitar = Guitar(parts[0], parts[1], float(parts[2]))
+        guitar = Guitar(parts[0], int(parts[1]), float(parts[2]))
         guitars.append(guitar)
     in_file.close()
     return guitars
