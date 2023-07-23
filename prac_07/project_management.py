@@ -50,11 +50,16 @@ def main():
 
 
 def get_new_project(projects):
-    name = str(input("Name: "))
+    name = ""
+    start_date = ""
+    priority = ""
+    cost_estimate = ""
+    completion_percentage = ""
+    name = determine_name_validity(name, "Name: ")
     start_date = input("Start date: ")
-    priority = int(input("Priority: "))
-    cost_estimate = float(input("Estimated cost: "))
-    completion_percentage = int(input("Completion percentage: "))
+    priority = determine_integer_validity(priority, "Priority: ")
+    cost_estimate = determine_float_validity(cost_estimate, "Estimated cost: ")
+    completion_percentage = determine_integer_validity(completion_percentage, "Completion percentage: ")
     projects.append(Project(name, start_date, priority, cost_estimate, completion_percentage))
     return projects
 
@@ -99,6 +104,18 @@ def determine_integer_validity(potential_integer, input_prompt):
     return potential_integer
 
 
+def determine_float_validity(potential_float, input_prompt):
+    """Checks if an integer is valid by making sure it is the correct type (int), then returns the integer"""
+    valid = False
+    while not valid:
+        try:
+            potential_float = float(input(f"{input_prompt}"))
+            valid = True
+        except ValueError:
+            print("Invalid input; enter a valid number")
+    return potential_float
+
+
 def determine_range_validity(potential_integer, minimum, maximum, input_prompt):
     """Checks if an integer is within a certain range"""
     valid = False
@@ -108,9 +125,20 @@ def determine_range_validity(potential_integer, minimum, maximum, input_prompt):
             valid = True
         else:
             print(f"The number must be between {minimum} and {maximum}")
-            potential_integer = determine_integer_validity(potential_integer, input_prompt)
-
     return potential_integer
+
+
+def determine_name_validity(potential_name, input_prompt):
+    """Checks if a name is valid by making sure it is not blank then returns the name"""
+    valid = False
+    while not valid:
+        for letter in potential_name:
+            if not letter.isspace():
+                valid = True
+        if not valid:
+            print("Input can not be blank")
+            potential_name = str(input(f"{input_prompt}"))
+    return potential_name
 
 
 main()
