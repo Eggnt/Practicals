@@ -3,6 +3,7 @@ Project management program
 90 minutes, 11:35 a.m.
 """
 import csv
+import datetime
 from prac_07.project import Project
 
 MENU = f"- (L)oad projects  \n- (S)ave projects  \n- (D)isplay projects  \n- (F)ilter projects by date\n" \
@@ -25,8 +26,11 @@ def main():
             print_projects_of_completion(sorted_projects, False)
             print("Completed Projects:")
             print_projects_of_completion(sorted_projects, True)
-        # elif choice == "F":
-        #
+        elif choice == "F":
+            given_date = input("Show projects that start after date (dd/mm/yy): ")
+            for project in projects:
+                if given_date <= project.start_date:
+                    print(project)
         elif choice == "A":
             get_new_project(projects)
         elif choice == "U":
@@ -42,6 +46,7 @@ def main():
         else:
             print("Invalid menu choice")
         choice = str(input(MENU)).upper()
+    print("Thank you for using custom-built project management software.")
 
 
 def get_new_project(projects):
@@ -74,6 +79,8 @@ def load_file(in_file):
     file.readline()
     reader = csv.reader(file, delimiter='\t')
     for row in reader:
+        row[1] = datetime.datetime.strptime(row[1], "%d/%m/%Y").date()
+        row[1] = row[1].strftime("%d/%m/%Y")
         project = Project(row[0], row[1], int(row[2]), float(row[3]), int(row[4]))
         projects.append(project)
     file.close()
