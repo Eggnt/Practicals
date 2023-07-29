@@ -13,24 +13,30 @@ MILES_TO_KMS = 1.60934
 
 class ConvertMilesKmApp(App):
     """ ConvertMilesKmApp is a kivy app for converting miles to km """
-    message = StringProperty()
+    miles_output = StringProperty()
+    user_input = StringProperty()
 
     def build(self):
         """ build the Kivy app from the kv file """
         Window.size = (1000, 400)
         self.title = "Convert Miles to Kilometres"
         self.root = Builder.load_file('convert_miles_km.kv')
-        self.message = "Convert miles to km"
+        self.miles_output = "Convert miles to km"
         return self.root
 
     def handle_increment(self, value, increment):
         result = self.get_valid_input(value) + increment
-        self.root.ids.km_input.text = str(result)
+        self.user_input = str(result)
+        self.handle_update(result)
 
     def handle_calculate(self, value):
         """ handle calculation (could be button press or other call), output result to label widget """
         result = self.get_valid_input(value) * MILES_TO_KMS
-        self.root.ids.output_label.text = str(result)
+        self.miles_output = str(result)
+
+    def handle_update(self, value):
+        result = self.get_valid_input(value) * MILES_TO_KMS
+        self.miles_output = str(result)
 
     def get_valid_input(self, value):
         try:
