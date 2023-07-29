@@ -32,10 +32,10 @@ class ConvertMilesKmApp(App):
     def handle_calculate(self, value):
         """ handle calculation (could be button press or other call), output result to label widget """
         result = self.get_valid_input(value) * MILES_TO_KMS
-        self.miles_output = str(result)
+        return result
 
     def handle_update(self, value):
-        result = self.get_valid_input(value) * MILES_TO_KMS
+        result = self.handle_calculate(value)
         self.miles_output = str(result)
 
     def get_valid_input(self, value):
