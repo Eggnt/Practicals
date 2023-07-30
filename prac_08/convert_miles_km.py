@@ -27,7 +27,6 @@ class ConvertMilesKmApp(App):
     def handle_increment(self, value, increment):
         result = self.get_valid_input(value) + increment
         self.user_input = str(result)
-        self.handle_update(result)
 
     def handle_calculate(self, value):
         """ handle calculation (could be button press or other call), output result to label widget """
