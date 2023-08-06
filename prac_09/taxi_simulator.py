@@ -30,7 +30,7 @@ def main():
             print("Invalid option")
         print(f"Bill to date: ${total_bill:.2f}")
         user_input = input(MENU).upper()
-    print(f"Total trip cost: ${total_bill:.2f}")
+    print(f"Total trip cost: ${total_bill:.2f}\nTaxis are now:")
     for i, taxi in enumerate(taxis):
         print(f"{i} - {taxi}")
 
