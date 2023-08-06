@@ -15,16 +15,16 @@ def main():
             print("Taxis available:")
             for i, taxi in enumerate(taxis):
                 print(f"{i} - {taxi}")
-            current_taxi = get_valid_taxi(max_taxi=len(taxis))
+            current_taxi = get_valid_taxi(taxis)
         elif user_input == "D":
             if current_taxi is None:
                 print("You need to choose a taxi before you can drive")
             else:
                 distance = get_valid_distance()
-                taxis[current_taxi].start_fare()
-                taxis[current_taxi].drive(distance)
-                bill = taxis[current_taxi].get_fare()
-                print(f"Your {taxis[current_taxi].name} trip cost you ${bill:.2f}")
+                current_taxi.start_fare()
+                current_taxi.drive(distance)
+                bill = current_taxi.get_fare()
+                print(f"Your {current_taxi.name} trip cost you ${bill:.2f}")
                 total_bill += bill
         else:
             print("Invalid option")
@@ -35,14 +35,11 @@ def main():
         print(f"{i} - {taxi}")
 
 
-def get_valid_taxi(max_taxi):
+def get_valid_taxi(taxis):
     try:
         potential_taxi = int(input("Choose taxi: "))
-        if 0 <= potential_taxi <= max_taxi:
-            return potential_taxi
-        else:
-            print("Invalid taxi choice")
-    except ValueError:
+        return taxis[potential_taxi]
+    except IndexError:
         print("Invalid taxi choice")
 
 
