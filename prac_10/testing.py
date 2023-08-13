@@ -12,6 +12,15 @@ def repeat_string(s, n):
     return " ".join([s] * n)
 
 
+def convert_to_sentence(clause):
+    """
+    >>> convert_to_sentence("hello world")
+    'Hello world.'
+    """
+    return f"{clause.capitalize()}."
+
+
+
 def is_long_word(word, length=5):
     """
     Determine if the word is as long or longer than the length passed in
@@ -48,6 +57,10 @@ def run_tests():
     test_car = Car(fuel=10)
     assert test_car.fuel == 10, "Car does not set fuel correctly"
 
+    clause = "hello world"
+    assert convert_to_sentence(clause)[-1:] == ".", "First letter not capitalised"
+    assert convert_to_sentence(clause)[0].isupper(), "Last character not a period"
+
 
 run_tests()
 
@@ -66,6 +79,3 @@ doctest.testmod()
 # and one more you decide (one that is valid!)
 # test this and watch the tests fail
 # then write the body of the function so that the tests pass
-
-    assert str(sentence[-1:]) == "."
-    assert str(sentence[0]).isupper()
